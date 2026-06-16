@@ -7,12 +7,13 @@
     "watch": "cds watch"
   },
   "dependencies": {
-    "@sap/cds": "^9.9.1",
     "@cap-js/sqlite": "^2.4.0",
+    "@sap-cloud-sdk/http-client": "^4.7.0",
+    "@sap-cloud-sdk/util": "^4.7.0",
+    "@sap/cds": "^9.9.1",
     "@sap/xssec": "^4.13.0",
     "express": "^4",
-    "@sap-cloud-sdk/http-client": "^4.7.0",
-    "@sap-cloud-sdk/util": "^4.7.0"
+    "hana-cli": "^4.202605.2"
   },
   "devDependencies": {
     "@sap/cds-dk": "^9.9.2",
@@ -27,12 +28,22 @@
   "cds": {
     "requires": {
       "[development]": {
-        "db": { "kind": "sqlite", "credentials": { "url": ":memory:" } },
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        },
         "auth": "dummy"
       },
       "[production]": {
         "auth": "xsuaa",
-        "db": { "kind": "sqlite", "credentials": { "url": ":memory:" } }
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        }
       }
     }
   }
