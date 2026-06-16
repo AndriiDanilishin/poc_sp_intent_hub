@@ -1,0 +1,23 @@
+{
+  "name": "poc_sp_intent_hub",
+  "version": "1.0.0",
+  "private": true,
+
+  "scripts": {
+    "start": "cds watch",
+    "start-local": "cds watch --open"
+  },
+
+  "devDependencies": {
+    "@sap/dev-cap-tools": "^1.31.0",
+    "cds-plugin-ui5": "^0.13.0"
+  },
+
+  "workspaces": [
+    "app/*"
+  ],
+
+  "sapux": [
+    "app/sourcing-requests"
+  ]
+}

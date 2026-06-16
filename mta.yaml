@@ -1,0 +1,62 @@
+_schema-version: "3.1"
+ID: ai-sourcing-poc
+version: 1.0.0
+
+modules:
+
+  - name: srv
+    type: nodejs
+    path: srv
+    build-parameters:      
+      builder: npm
+    requires:
+      - name: xsuaa
+      - name: destination
+    provides:
+      - name: srv-api
+        properties:
+          url: ${default-url}
+
+  - name: app
+    type: html5
+    path: app/sourcing-requests
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+    requires:
+      - name: html5-repo-host
+
+  - name: approuter
+    type: approuter.nodejs
+    path: approuter
+    requires:
+      - name: xsuaa
+      - name: destination
+      - name: html5-repo-runtime
+
+resources:
+
+  - name: xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+
+  - name: destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  - name: html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: html5-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
