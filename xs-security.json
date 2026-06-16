@@ -1,6 +1,23 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": [],
-  "authorities-inheritance": false
+  "xsappname": "ai-sourcing-poc",
+  "tenant-mode": "dedicated",
+  "description": "Security profile for AI Sourcing PoC",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.User",
+      "description": "Sourcing PoC user"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "SourcingUser",
+      "description": "Sourcing PoC user",
+      "scope-references": ["$XSAPPNAME.User"]
+    }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/**"
+    ]
+  }
 }

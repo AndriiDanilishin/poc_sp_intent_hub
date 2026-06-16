@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/JourneyRunner","sourcingrequests/test/integration/pages/RequestsList","sourcingrequests/test/integration/pages/RequestsObjectPage"],function(e,s,t){"use strict";var u=new e({launchUrl:sap.ui.require.toUrl("sourcingrequests")+"/test/flpSandbox.html#sourcingrequests-tile",pages:{onTheRequestsList:s,onTheRequestsObjectPage:t},async:true});return u});
+//# sourceMappingURL=JourneyRunner.js.map

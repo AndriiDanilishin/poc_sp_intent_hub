@@ -2,12 +2,31 @@ _schema-version: "3.1"
 ID: ai-sourcing-poc
 version: 1.0.0
 
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        # backend
+        - npm ci
+        - npx cds build --production
+        # frontend -> build UI5 app and place it into the approuter
+        - npm install --prefix app/sourcing-requests
+        - npm run build --prefix app/sourcing-requests
+        - rm -rf approuter/resources
+        - mkdir -p approuter/resources
+        - cp -r app/sourcing-requests/dist/. approuter/resources/
+
 modules:
 
+  # ---------- CAP backend ----------
   - name: srv
     type: nodejs
-    path: srv
-    build-parameters:      
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+      disk-quota: 512M
+    build-parameters:
       builder: npm
     requires:
       - name: xsuaa
@@ -17,23 +36,22 @@ modules:
         properties:
           url: ${default-url}
 
-  - name: app
-    type: html5
-    path: app/sourcing-requests
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-    requires:
-      - name: html5-repo-host
-
+  # ---------- Approuter: serves UI + proxies /odata ----------
   - name: approuter
     type: approuter.nodejs
     path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 512M
     requires:
       - name: xsuaa
       - name: destination
-      - name: html5-repo-runtime
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{url}
+          forwardAuthToken: true
 
 resources:
 
@@ -42,21 +60,10 @@ resources:
     parameters:
       service: xsuaa
       service-plan: application
+      path: ./xs-security.json
 
   - name: destination
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
       service-plan: lite
-
-  - name: html5-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: html5-repo-runtime
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-runtime
