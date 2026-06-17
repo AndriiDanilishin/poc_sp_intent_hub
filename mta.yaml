@@ -29,7 +29,7 @@ modules:
       disk-quota: 512M
     build-parameters:
       builder: npm
-      ignore: ["node_modules/"]        # ← додай
+      ignore: ["node_modules/"]        
     requires:
       - name: xsuaa
       - name: destination
@@ -46,7 +46,7 @@ modules:
       memory: 256M
       disk-quota: 512M
     build-parameters:
-      ignore: ["node_modules/"]        # ← додай
+      ignore: ["node_modules/"]        
     requires:
       - name: xsuaa
       - name: destination
@@ -62,8 +62,10 @@ modules:
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
+      memory: 512M
+      disk-quota: 512M
     build-parameters:
-      ignore: ["node_modules/"]        # ← додай
+      ignore: ["node_modules/"]       
     requires:
       - name: poc_sp_intent_hub-db
 
@@ -88,4 +90,4 @@ resources:
       service: hana
       service-plan: hdi-shared
       config:
-        database_id: 034adae1-0899-466b-b92b-77e41992a5c3    ← отримай з BTP Cockpit 034adae1-0899-466b-b92b-77e41992a5c3
+        database_id: 034adae1-0899-466b-b92b-77e41992a5c3    
