@@ -1,15 +1,17 @@
 _schema-version: "3.1"
 ID: ai-sourcing-poc
 version: 1.0.0
+description: "Intent Hub."
+
+parameters:
+  enable-parallel-deployments: true
 
 build-parameters:
   before-all:
     - builder: custom
       commands:
-        # backend
-        - npm ci
+        - npm install --omit=optional   
         - npx cds build --production
-        # frontend -> build UI5 app and place it into the approuter
         - npm install --prefix app/sourcing-requests
         - npm run build --prefix app/sourcing-requests
         - rm -rf approuter/resources
@@ -18,7 +20,6 @@ build-parameters:
 
 modules:
 
-  # ---------- CAP backend ----------
   - name: srv
     type: nodejs
     path: gen/srv
@@ -28,21 +29,24 @@ modules:
       disk-quota: 512M
     build-parameters:
       builder: npm
+      ignore: ["node_modules/"]        # ← додай
     requires:
       - name: xsuaa
       - name: destination
+      - name: poc_sp_intent_hub-db
     provides:
       - name: srv-api
         properties:
           url: ${default-url}
 
-  # ---------- Approuter: serves UI + proxies /odata ----------
   - name: approuter
     type: approuter.nodejs
     path: approuter
     parameters:
       memory: 256M
       disk-quota: 512M
+    build-parameters:
+      ignore: ["node_modules/"]        # ← додай
     requires:
       - name: xsuaa
       - name: destination
@@ -52,6 +56,16 @@ modules:
           name: srv-api
           url: ~{url}
           forwardAuthToken: true
+
+  - name: poc_sp_intent_hub-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      ignore: ["node_modules/"]        # ← додай
+    requires:
+      - name: poc_sp_intent_hub-db
 
 resources:
 
@@ -67,3 +81,11 @@ resources:
     parameters:
       service: destination
       service-plan: lite
+
+  - name: poc_sp_intent_hub-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      config:
+        database_id: 034adae1-0899-466b-b92b-77e41992a5c3    ← отримай з BTP Cockpit 034adae1-0899-466b-b92b-77e41992a5c3

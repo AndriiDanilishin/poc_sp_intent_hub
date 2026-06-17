@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "cds-serve",
-    "watch": "cds watch"
+    "watch": "cds watch",
+    "build": "cds build --production"
   },
   "dependencies": {
-    "@cap-js/sqlite": "^2.4.0",
+    "@cap-js/hana": "^2",
     "@sap-cloud-sdk/http-client": "^4.7.0",
     "@sap-cloud-sdk/util": "^4.7.0",
     "@sap/cds": "^9.9.1",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@sap/cds-dk": "^9.9.2",
+    "@cap-js/sqlite": "^2.4.0",
     "cds-plugin-ui5": "^0.13.0"
   },
   "workspaces": [
@@ -27,24 +29,34 @@
   ],
   "cds": {
     "requires": {
-      "[development]": {
-        "db": {
+      "db": {
+        "kind": "sql",
+        "[development]": {
           "kind": "sqlite",
           "credentials": {
             "url": ":memory:"
           }
         },
-        "auth": "dummy"
+        "[production]": {
+          "kind": "hana-cloud",
+          "deploy-format": "hdbtable"
+        },
+        "[hybrid]": {
+          "kind": "hana-cloud",
+          "deploy-format": "hdbtable"
+        }
       },
-      "[production]": {
-        "auth": "xsuaa",
-        "db": {
-          "kind": "sqlite",
-          "credentials": {
-            "url": ":memory:"
-          }
+      "auth": {
+        "[development]": {
+          "kind": "dummy"
+        },
+        "[production]": {
+          "kind": "xsuaa"
         }
       }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
     }
   }
 }
