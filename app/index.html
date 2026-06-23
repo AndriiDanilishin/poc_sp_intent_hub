@@ -3,14 +3,10 @@
 
 <head>
     <title> Project Preview </title>
-    <script src="https://ui5.sap.com/1.136.9/resources/sap-ui-core.js" 
-            id="sap-ui-bootstrap"
-            data-sap-ui-theme="sap_horizon"
-            data-sap-ui-bindingSyntax="complex" 
-            data-sap-ui-xx-bindingSyntax="complex"
-            data-sap-ui-resourceroots='{"assets": "assets"}' 
-            data-sap-ui-libs="sap.m,sap.uxap,sap.ui.layout,sap.f">
-    </script>
+    <script src="https://ui5.sap.com/1.136.9/resources/sap-ui-core.js" id="sap-ui-bootstrap"
+        data-sap-ui-theme="sap_horizon" data-sap-ui-bindingSyntax="complex" data-sap-ui-xx-bindingSyntax="complex"
+        data-sap-ui-resourceroots='{"assets": "assets"}' data-sap-ui-libs="sap.m,sap.uxap,sap.ui.layout,sap.f">
+        </script>
     <link rel="stylesheet" href="assets/preview.css">
 </head>
 
@@ -27,7 +23,17 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"SourcingService","DetailsURL":"./odata/v4/sourcing/","Metadata":"./odata/v4/sourcing/$metadata","Entities":[{"Name":"Requests","URL":"./odata/v4/sourcing/Requests","FioriURL":"$fiori-preview/SourcingService/Requests#preview-app"},{"Name":"Suppliers","URL":"./odata/v4/sourcing/Suppliers","FioriURL":"$fiori-preview/SourcingService/Suppliers#preview-app"},{"Name":"Materials","URL":"./odata/v4/sourcing/Materials","FioriURL":"$fiori-preview/SourcingService/Materials#preview-app"}],"EntitiesCount":3}]}
+                            const data = {
+                                "Services": [{
+                                    "ServiceName": "SourcingService",
+                                    "DetailsURL": "./odata/v4/sourcing/",
+                                    "Metadata": "./odata/v4/sourcing/$metadata",
+                                    "Entities": [{ "Name": "Requests", "URL": "./odata/v4/sourcing/Requests", "FioriURL": "$fiori-preview/SourcingService/Requests#preview-app" },
+                                    { "Name": "Suppliers", "URL": "./odata/v4/sourcing/Suppliers", "FioriURL": "$fiori-preview/SourcingService/Suppliers#preview-app" },
+                                    { "Name": "Materials", "URL": "./odata/v4/sourcing/Materials", "FioriURL": "$fiori-preview/SourcingService/Materials#preview-app" }], 
+                                    "EntitiesCount": 3
+                                }]
+                            }
                             this.getView().setModel(new JSONModel(data));
                         }
                     });
