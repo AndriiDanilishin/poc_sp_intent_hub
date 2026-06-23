@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{appTitle}}</title>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sourcing Hub</title>
 
-        <script>
-            window["sap-ushell-config"] = {
-  "defaultRenderer": "fiori2",
-  "renderers": {
-    "fiori2": {
-      "componentData": {
-        "config": {
-          "enableSearch": false
-        }
-      }
-    }
-  },
-  "applications": {
-    "sourcingrequests-open": {
-      "title": "Sourcing Requests",
-      "description": "Manage sourcing requests efficiently with AI enrichment and project creation",
-      "applicationType": "URL",
-      "navigationMode": "newWindowThenEmbedded",
-      "url": "./sourcing-requests/webapp",
-      "additionalInformation": "SAPUI5.Component=sourcingrequests"
-    }
-  }
-};
-        </script>
-        <link rel="stylesheet" href="assets/launchpad.css">
-        <script src="https://ui5.sap.com/1.136.9/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
-        <script
-            src="https://ui5.sap.com/1.136.9/resources/sap-ui-core.js"
-            data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
-            data-sap-ui-compatVersion="edge"
-            data-sap-ui-theme="sap_horizon"
-            data-sap-ui-frameOptions="allow"
-            data-sap-ui-bindingSyntax="complex"
-            data-sap-ui-xx-viewCache="false"
-        ></script>
-        <script>
-            sap.ui.getCore().attachInit(function() {
-                sap.ushell.Container.createRenderer("fiori2", true).then(function(oRenderer) {
-                  oRenderer.placeAt('content');
-                });
+    <script>
+        window["sap-ushell-config"] = {
+            defaultRenderer: "fiori2",
+            renderers: {
+                fiori2: {
+                    componentData: {
+                        config: { enableSearch: false }
+                    }
+                }
+            },
+            applications: {
+                "SourcingRequest-display": {
+                    title: "Sourcing Requests",
+                    description: "Manage sourcing requests with AI enrichment",
+                    additionalInformation: "SAPUI5.Component=sourcingrequests",
+                    applicationType: "SAPUI5",
+                    url: "/sourcing-requests/webapp",
+                    navigationMode: "embedded"
+                }
+            }
+        };
+    </script>
+
+    <link rel="stylesheet" href="assets/launchpad.css">
+
+    <script src="https://sapui5.hana.ondemand.com/1.136.0/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+    <script
+        id="sap-ui-bootstrap"
+        src="https://sapui5.hana.ondemand.com/1.136.0/resources/sap-ui-core.js"
+        data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-frameOptions="allow"
+        data-sap-ui-bindingSyntax="complex"
+        data-sap-ui-resourceroots='{"sourcingrequests": "/sourcing-requests/webapp/"}'>
+    </script>
+
+    <script>
+        sap.ui.getCore().attachInit(function () {
+            sap.ushell.Container.createRenderer("fiori2", true).then(function (oRenderer) {
+                oRenderer.placeAt("content");
             });
-        </script>
-    </head>
-    <body class="sapUiBody" id="content"></body>
+        });
+    </script>
+</head>
+<body class="sapUiBody" id="content"></body>
 </html>

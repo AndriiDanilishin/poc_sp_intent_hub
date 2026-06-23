@@ -1,0 +1,10 @@
+_schema-version: "3.1"
+ID: ai-sourcing-poc
+extends: ai-sourcing-poc
+
+modules:
+  - name: srv
+    properties:
+      AI_ENDPOINT: "REPLACE_ME"
+      AI_API_KEY:  "REPLACE_ME"
+      AI_MODEL:    "gpt-4o-mini"

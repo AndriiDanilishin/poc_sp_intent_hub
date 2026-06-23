@@ -10,7 +10,7 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install --omit=optional   
+        - npm install --omit=optional
         - npx cds build --production
         - npm install --prefix app/sourcing-requests
         - npm run build --prefix app/sourcing-requests
@@ -29,7 +29,8 @@ modules:
       disk-quota: 512M
     build-parameters:
       builder: npm
-      ignore: ["node_modules/"]        
+      ignore:
+        - "node_modules/"
     requires:
       - name: xsuaa
       - name: destination
@@ -46,7 +47,8 @@ modules:
       memory: 256M
       disk-quota: 512M
     build-parameters:
-      ignore: ["node_modules/"]        
+      ignore:
+        - "node_modules/"
     requires:
       - name: xsuaa
       - name: destination
@@ -65,7 +67,8 @@ modules:
       memory: 512M
       disk-quota: 512M
     build-parameters:
-      ignore: ["node_modules/"]       
+      ignore:
+        - "node_modules/"
     requires:
       - name: poc_sp_intent_hub-db
 
@@ -90,4 +93,4 @@ resources:
       service: hana
       service-plan: hdi-shared
       config:
-        database_id: 034adae1-0899-466b-b92b-77e41992a5c3    
+        database_id: 034adae1-0899-466b-b92b-77e41992a5c3

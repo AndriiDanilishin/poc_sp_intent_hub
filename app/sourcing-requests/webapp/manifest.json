@@ -17,11 +17,24 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/sourcing/",
+        "uri": "/sourcing/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SourcingRequest-display": {
+          "semanticObject": "SourcingRequest",
+          "action": "display",
+          "title": "{{appTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
@@ -49,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -81,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "RequestsList",
-          "target": "RequestsList"
+          "target": [
+            "RequestsList"
+          ]
         },
         {
           "pattern": "Requests({key}):?query:",
           "name": "RequestsObjectPage",
-          "target": "RequestsObjectPage"
+          "target": [
+            "RequestsList",
+            "RequestsObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -116,9 +141,12 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "RequestsObjectPage": {
           "type": "Component",
@@ -129,14 +157,22 @@
               "editableHeaderContent": false,
               "contextPath": "/Requests"
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/Requests({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
     "registrationIds": [],
-    "archeType": "transactional"
+    "archetype": "transactional"
   },
   "sap.fe": {
     "app": {

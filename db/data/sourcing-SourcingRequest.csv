@@ -1,0 +1,6 @@
+ID;title;description;source;status;priority;requester;requesterEmail;dueDate;totalValue;currency;erpProjectID;aiSummary;aiRiskScore;aiConfidence;aiEnrichedAt;createdAt;createdBy;modifiedAt;modifiedBy
+e1f2a3b4-0001-0001-0001-000000000001;Q3 Laptop Rollout;500 laptops for Q3 rollout Frankfurt office;EMAIL;SUBMITTED;HIGH;Alice Weber;alice@example.com;2026-09-30;675000.00;EUR;;;;;;;;
+e1f2a3b4-0001-0001-0001-000000000002;Office Furniture Frankfurt;New furniture for Frankfurt site expansion;MANUAL;IN_REVIEW;MEDIUM;Bob Müller;bob@example.com;2026-08-15;87500.00;EUR;;;;;;;;
+e1f2a3b4-0001-0001-0001-000000000003;Warehouse Safety Equipment;Safety gear for warehouse team;EMAIL;APPROVED;HIGH;Carol Schmidt;carol@example.com;2026-07-31;12500.00;EUR;;;;;;;;
+e1f2a3b4-0001-0001-0001-000000000004;IT Infrastructure Upgrade;Server and network equipment upgrade;API;DRAFT;CRITICAL;Hans Weber;hans@example.com;2026-10-15;250000.00;EUR;;;;;;;;
+e1f2a3b4-0001-0001-0001-000000000005;Marketing Materials Q4;Printed materials for Q4 campaign;MANUAL;DRAFT;LOW;Maria Schmidt;maria@example.com;2026-11-01;8500.00;EUR;;;;;;;;

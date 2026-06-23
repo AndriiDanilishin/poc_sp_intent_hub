@@ -1,4 +1,4 @@
-using SourcingService as service from '../../srv/service';
+using SourcingService as service from '../../srv/sourcing-service';
 
 annotate service.Requests with @(
 
