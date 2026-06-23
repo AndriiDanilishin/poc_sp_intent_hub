@@ -1,0 +1,16 @@
+_schema-version: "3.1"
+ID: ai-sourcing-poc
+extends: ai-sourcing-poc
+
+modules:
+
+  - name: srv
+    properties:
+      AI_ENDPOINT: "https://your-ai-endpoint"
+      AI_API_KEY:  "your-api-key"
+      AI_MODEL:    "gpt-4o-mini"
+
+  - name: approuter
+    parameters:
+      routes:
+        - route: ddfb6835trial-dev-approuter.cfapps.us10-001.hana.ondemand.com
